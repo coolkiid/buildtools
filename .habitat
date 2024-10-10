@@ -1,0 +1,11 @@
+solutions = [
+    {
+        "name": ".",
+        "deps_file": "DEPS",
+        "url": "git@github.com:lynx-infra/buildtools.git",
+        "branch": "main",
+        "target_deps_files": {
+            "cmake": "DEPS.cmake",
+        },
+    }
+]
