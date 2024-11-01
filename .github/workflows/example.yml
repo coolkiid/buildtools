@@ -1,0 +1,25 @@
+name: github release example
+
+on:
+  push:
+    branches:
+      - "github-release-example"
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: prepare file
+        run: |
+          echo "hello world" > example.txt
+    
+      - name: push to release via push event
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "example*"

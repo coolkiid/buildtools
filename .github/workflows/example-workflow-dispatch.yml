@@ -1,0 +1,28 @@
+name: github release example workflow dispatch
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'tag for releases'
+        required: true
+        type: string
+
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: prepare file
+        run: |
+          echo "hello world" > example.txt
+
+      - name: push to release via workflow dispatcher
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.event.inputs.tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "example*"
